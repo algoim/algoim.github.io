@@ -21,11 +21,18 @@ In practice, to calculate integrals over implicitly defined domains, a quadratur
 
 <div style="width:502px; margin: 0 auto; font-size: 70%"><img src="img-quad.png"/><br/>Some examples illustrating the quadrature schemes constructed by the algorithm (based on a one-dimensional Gaussian quadrature scheme of order 4) for surface integrals (left column) and volume integrals (middle/right columns). The weights are coloured according to a scale that is normalised for each particular case: pale indicates a low-valued weight and dark blue indicates a high-valued weight.</div>
 
-
 ### Citing
 
 If you make use of these quadrature algorithms in your research, in any documentation or publication, in addition to _Algoim_ please cite the original paper describing these algorithms:
 - [R. I. Saye, _High-Order Quadrature Methods for Implicitly Defined Surfaces and Volumes in Hyperrectangles_, SIAM Journal on Scientific Computing, 37(2), A993-A1019 (2015)](http://dx.doi.org/10.1137/140966290)
+
+### Using
+
+main driver
+templated on function object that implements operator and grad, both templated on type to do interval arithmetic
+
+### Examples
+
 
 ## Advanced
 
