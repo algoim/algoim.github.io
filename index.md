@@ -19,7 +19,7 @@ An implicitly defined domain is either a volumetric region or codimension-one su
 
 In practice, to calculate integrals over implicitly defined domains, a quadrature scheme must be computed. In [R. I. Saye, _High-Order Quadrature Methods for Implicitly Defined Surfaces and Volumes in Hyperrectangles_, SIAM Journal on Scientific Computing, 37(2), A993-A1019 (2015)](http://dx.doi.org/10.1137/140966290), a general purpose, high-order accurate quadrature algorithm has been developed, based on the idea of converting the implicitly defined geometry into the graph of an implicitly defined height function, leading to a recursive algorithm on the number of spatial dimensions, requiring only one-dimensional root finding and simple one-dimensional Gaussian quadrature schemes. These algorithms produce quadrature schemes with strictly positive quadrature weights and inherits the high-order accuracy of Gaussian quadrature, e.g., with 10 quadrature points (per dimension), 20th order accuracy can be achieved. Examples of generated quadrature schemes are shown in the figure.
 
-![](path_to_image)
+![](img-quad.png)
 *image_caption*
 
 
