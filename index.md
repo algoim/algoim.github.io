@@ -28,10 +28,23 @@ If you make use of these quadrature algorithms in your research, in any document
 
 ### Using
 
+The driver header file for the quadrature algorithms are located in `algoim/src/algoim_quad.hpp`. There is only one driver routine, `quadGen` which is templated on the level set function object `phi` and the dimension `N`:
+
 ```C++
 template<typename F, int N>
-Algoim::QuadratureRule<N> Algoim::quadGen(const F& phi, const Algoim::BoundingBox<Real,N>& xrange, int dim, int side, int qo)
+Algoim::QuadratureRule<N> Algoim::quadGen(const F& phi, const Algoim::BoundingBox<Real,N>& xrange,
+                                          int dim, int side, int qo);
 ```
+The provided parameters are as follows:
+
+- `phi` is a user-defined function object which evaluates the level set function and its gradient. It must implement both `template<typename T> operator() (const blitz::TinyVector<T,N>& x) const` and `template<typename T> grad(const blitz::TinyVector<T,N>& x) const`. In the simplest case, `T = double` and the role of `phi` is to simply evaluate the level set function (e.g., `return x(0)^2 + x(1)^2 - 1;` for a unit circle) and its gradient (e.g., `return TinyVector<double,2>(2.0*x(0), 2.0*x(1));`). However, it is crucial that these two member functions be templated on `T`, as this implements the interval arithmetic underlying the algorithms of the paper cited above. Essentially, the interval arithmetic automatically computes a first-order Taylor series (with bounded remainder) of the given level set function, and uses that to make decisions concerning the existence of the interface, its curvature, and what direction to take in re-imagining the implicitly defined geometry as the graph of an implicitly defined height function.
+- `xrange` is a user-specified bounding box, indicating the extent of the hyperrectangle in `N` dimensions to which the quadrature algorithm is applied.
+- `dim` is used to specify the type of quadrature:
+    - If `dim < 0`, compute a **volumetric quadrature scheme**, whose domain is implicitly defined by `{phi < 0}` intersected with `xrange`.
+    - If `dim == N`, compute a **curved surface quadrature scheme**, whose domain is implicitly defined by `{phi == 0}` intersected with `xrange`.
+    - If `0 <= dim && dim < N`, compute a **flat surface quadrature schme** for one of the sides of the hyperrectangle, i.e., `{phi < 0}` intersected with `xrange` intersected with the side `{x(dim) == xrange(side)(dim)`.
+- `side` is used only when `0 <= dim && dim < N` and specifies which side, either `side == 0` or `side == 1` for the "left" or "right", respectively.
+- `qo` specifies the degree of the underlying one-dimensional Gaussian quadrature scheme, e.g., `qo = 4` in the figure above.
 
 main driver
 templated on function object that implements operator and grad, both templated on type to do interval arithmetic
