@@ -17,7 +17,7 @@ Algoim is a header-only C++ library; except for small example/demonstration appl
 
 ### Citing
 
-If you make use of these quadrature algorithms in your research, please cite the original paper describing these algorithms:
+If you make use of these quadrature algorithms in your research, in any documentation or publication, please cite the original paper describing these algorithms:
 - [R. I. Saye, _High-Order Quadrature Methods for Implicitly Defined Surfaces and Volumes in Hyperrectangles_, SIAM Journal on Scientific Computing, 37(2), A993-A1019 (2015)](http://dx.doi.org/10.1137/140966290)
 
 ## Advanced
