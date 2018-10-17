@@ -28,6 +28,11 @@ If you make use of these quadrature algorithms in your research, in any document
 
 ### Using
 
+```C++
+template<typename F, int N>
+Algoim::QuadratureRule<N> Algoim::quadGen(const F& phi, const Algoim::BoundingBox<Real,N>& xrange, int dim, int side, int qo)
+```
+
 main driver
 templated on function object that implements operator and grad, both templated on type to do interval arithmetic
 
