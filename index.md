@@ -7,11 +7,11 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
 
 ## Prerequisites
 
-Many of the numerical algorithms implemented in Algoim are templated on the spatial dimension `N`, allowing one to develop numerical schemes for any number of spatial dimensions. To assist with this functionality, Algoim makes use of the open source C++ library [blitz++](https://github.com/blitzpp/blitz) for high-performance fixed-length vector arithmetic, though `template<typename T, int N> blitz::TinyVector<T,N>`. In order to use Algoim, [blitz++](https://github.com/blitzpp/blitz) should first be downloaded, configured for your compiler, and installed such that it can be found in the appropriate include directories, i.e., so that `#include <blitz/array.h>` resolves correctly.
+Many of the numerical algorithms implemented in Algoim are templated on the spatial dimension `N`, allowing one to develop numerical schemes for any number of spatial dimensions. To assist with this functionality, Algoim makes use of the open source C++ library [blitz++](https://github.com/blitzpp/blitz) for high-performance fixed-length vector arithmetic, though `template<typename T, int N> blitz::TinyVector<T,N>`. Therefore, **[blitz++](https://github.com/blitzpp/blitz) should first be downloaded, configured for your compiler, and installed** such that it can be found in the appropriate include directories, i.e., so that `#include <blitz/array.h>` resolves correctly.
 
 ## Installation
 
-Algoim is a header-only C++ library; except for small example/demonstration applications, all of the files are C++ `.hpp` header files. As such it requires minimal installation effort, simply download and configure so that the appropriate header driver can be found by your compiler when you include it in your C++ program, e.g., `#include "algoim/src/algoim_quad.hpp"`.
+Algoim is a header-only C++ library. Except for small example/demonstration applications, all of the files are C++ `.hpp` header files. As such, it requires minimal installation effort: simply download and configure so that the appropriate header driver can be found by your compiler when you include it in your C++ program, e.g., `#include "algoim/src/algoim_quad.hpp"`.
 
 ## High-Order Quadrature Algorithms for Implicitly Defined Domains
 
