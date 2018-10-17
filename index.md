@@ -7,7 +7,7 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
 
 ## Prerequisites
 
-Many of the numerical algorithms implemented in Algoim are templated on the spatial dimension `N`, allowing one to develop numerical schemes for any number of spatial dimensions. To assist with this functionality, Algoim makes heavy use of the open source C++ library [blitz++](https://github.com/blitzpp/blitz) for high-performance fixed-length vector arithmetic, via `template<typename T, int N> blitz::TinyVector<T,N>`. In order to use Algoim, [blitz++](https://github.com/blitzpp/blitz) should first be downloaded and configured for your compiler, and installed such that it can be found in the appropriate include directories, i.e., so that `#include <blitz/array.h>` resolves correctly.
+Many of the numerical algorithms implemented in Algoim are templated on the spatial dimension `N`, allowing one to develop numerical schemes for any number of spatial dimensions. To assist with this functionality, Algoim makes heavy use of the open source C++ library [blitz++](https://github.com/blitzpp/blitz) for high-performance fixed-length vector arithmetic using `template<typename T, int N> blitz::TinyVector<T,N>`. In order to use Algoim, [blitz++](https://github.com/blitzpp/blitz) should first be downloaded, configured for your compiler, and installed such that it can be found in the appropriate include directories, i.e., so that `#include <blitz/array.h>` resolves correctly.
 
 ## Installation
 
