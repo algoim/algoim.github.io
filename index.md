@@ -7,13 +7,21 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
 
 ## Prerequisites
 
-Many of the numerical algorithms implemented in Algoim are templated on the spatial dimension `N`, allowing one to develop numerical schemes for any number of spatial dimensions. To assist with this functionality, Algoim makes heavy use of the open source C++ library [blitz++](https://github.com/blitzpp/blitz) for high-performance fixed-length vector arithmetic using `template<typename T, int N> blitz::TinyVector<T,N>`. In order to use Algoim, [blitz++](https://github.com/blitzpp/blitz) should first be downloaded, configured for your compiler, and installed such that it can be found in the appropriate include directories, i.e., so that `#include <blitz/array.h>` resolves correctly.
+Many of the numerical algorithms implemented in Algoim are templated on the spatial dimension `N`, allowing one to develop numerical schemes for any number of spatial dimensions. To assist with this functionality, Algoim makes use of the open source C++ library [blitz++](https://github.com/blitzpp/blitz) for high-performance fixed-length vector arithmetic, though `template<typename T, int N> blitz::TinyVector<T,N>`. In order to use Algoim, [blitz++](https://github.com/blitzpp/blitz) should first be downloaded, configured for your compiler, and installed such that it can be found in the appropriate include directories, i.e., so that `#include <blitz/array.h>` resolves correctly.
 
 ## Installation
 
-Algoim is a header-only C++ library; except for small example/demonstration applications, all of the files are C++ `.hpp` header files. As such it requires minimal installation effort, simply download and configure so that the appropriate header drive can be found by your compiler when you include it in your C++ program, e.g., `#include "algoim/src/algoim_quad.hpp"`.
+Algoim is a header-only C++ library; except for small example/demonstration applications, all of the files are C++ `.hpp` header files. As such it requires minimal installation effort, simply download and configure so that the appropriate header driver can be found by your compiler when you include it in your C++ program, e.g., `#include "algoim/src/algoim_quad.hpp"`.
 
 ## High-Order Quadrature Algorithms for Implicitly Defined Domains
+
+An implicitly defined domain is either a volumetric region or codimension-one surface whose shape is characterised implicitly by an isosurface of a continuous scalar function. A variety of applications involving implicitly defined geometry require the evaluation of integrals over such domains, including level set methods for propagating interfaces in computational physics, embedded boundary methods for solving partial differential equations on curved domains, and in treating jump conditions and singular source terms in weak formulations. A specific example is that of [implicit mesh discontinuous Galerkin methods](https://doi.org/10.1016/j.jcp.2017.04.076), which has been developed to facilitate high-order accurate modelling of interfacial fluid dynamics.
+
+In practice, to calculate integrals over implicitly defined domains, a quadrature scheme must be computed. In [R. I. Saye, _High-Order Quadrature Methods for Implicitly Defined Surfaces and Volumes in Hyperrectangles_, SIAM Journal on Scientific Computing, 37(2), A993-A1019 (2015)](http://dx.doi.org/10.1137/140966290), a general purpose, high-order accurate quadrature algorithm has been developed, based on the idea of converting the implicitly defined geometry into the graph of an implicitly defined height function, leading to a recursive algorithm on the number of spatial dimensions, requiring only one-dimensional root finding and simple one-dimensional Gaussian quadrature schemes. These algorithms produce quadrature schemes with strictly positive quadrature weights and inherits the high-order accuracy of Gaussian quadrature, e.g., with 10 quadrature points (per dimension), 20th order accuracy can be achieved. Examples of generated quadrature schemes are shown in the figure.
+
+![](path_to_image)
+*image_caption*
+
 
 ### Citing
 
