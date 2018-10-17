@@ -11,7 +11,7 @@ Many of the numerical algorithms implemented in Algoim are templated on the spat
 
 ## Installation
 
-Algoim is a header-only C++ library; except for small example/demonstration applications, all of the files are C++ `.hpp` header files. As such it requires minimal installation effort, simply download and configure so that the `src` directory can be found by your compiler when you include the appropriate header drive, e.g., `#include "algoim/src/algoim_quad.hpp"`.
+Algoim is a header-only C++ library; except for small example/demonstration applications, all of the files are C++ `.hpp` header files. As such it requires minimal installation effort, simply download and configure so that the appropriate header drive can be found by your compiler when you include it in your C++ program, e.g., `#include "algoim/src/algoim_quad.hpp"`.
 
 ## High-Order Quadrature Algorithms for Implicitly Defined Domains
 
