@@ -26,9 +26,9 @@ In practice, to calculate integrals over implicitly defined domains, a quadratur
 If you make use of these quadrature algorithms in your research, in any documentation or publication please cite (in addition to _Algoim_) the original paper describing these algorithms:
 - [R. I. Saye, _High-Order Quadrature Methods for Implicitly Defined Surfaces and Volumes in Hyperrectangles_, SIAM Journal on Scientific Computing, 37(2), A993-A1019 (2015)](http://dx.doi.org/10.1137/140966290)
 
-### Using
+### Usage
 
-The driver header file for the quadrature algorithms are located in `algoim/src/algoim_quad.hpp`. There is only one driver routine, `quadGen` which is templated on the level set function object `phi` and the dimension `N`:
+The driver header file for the quadrature algorithms is located at `algoim/src/algoim_quad.hpp`. There is only one driver routine, `quadGen` which is templated on the level set function object `phi` and the dimension `N`:
 
 ```C++
 template<typename F, int N>
