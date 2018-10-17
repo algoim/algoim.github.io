@@ -23,7 +23,7 @@ In practice, to calculate integrals over implicitly defined domains, a quadratur
 
 ### Citing
 
-If you make use of these quadrature algorithms in your research, in any documentation or publication, in addition to _Algoim_ please cite the original paper describing these algorithms:
+If you make use of these quadrature algorithms in your research, in any documentation or publication please cite (in addition to _Algoim_) the original paper describing these algorithms:
 - [R. I. Saye, _High-Order Quadrature Methods for Implicitly Defined Surfaces and Volumes in Hyperrectangles_, SIAM Journal on Scientific Computing, 37(2), A993-A1019 (2015)](http://dx.doi.org/10.1137/140966290)
 
 ### Using
