@@ -1,3 +1,4 @@
 theme: jekyll-theme-cayman
 title: Algoim
 description: Algorithms for implicitly defined geometry, level set methods, and Voronoi implicit interface methods
+show_downloads: true
