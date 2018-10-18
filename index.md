@@ -161,4 +161,4 @@ When either of the above preprocessor directives are enabled, `Algoim::Real` cea
 
 ## About
 
-_Algoim_ was developed by [Robert Saye](http://math.lbl.gov/~saye/) in the [Mathematics Group](http://math.lbl.gov) at the [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) as part of his research in numerical methods for high-order accurate interface dynamics and motivated by applications in multi-phase multi-physics. For more information and applications of these algorithms, visit [his research page](http://math.lbl.gov/~saye/).
+_Algoim_ was developed by [Robert Saye](http://math.lbl.gov/~saye/) in the [Mathematics Group](http://math.lbl.gov) at the [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) as part of his research in numerical methods for high-order accurate interface dynamics with applications in multi-phase multi-physics. For more information and applications of these algorithms, visit [his research page](http://math.lbl.gov/~saye/).
