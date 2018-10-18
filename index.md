@@ -56,7 +56,7 @@ The output of `quadGen` is an `Algoim::QuadratureRule<N>` object. This object is
 
 ### Examples
 
-(All of these examples are implemented in `algoim/examples/quad.cpp` in a single `main()` engine; compile them with a C++14 compatible compiler of your choice.)
+(All of these examples are implemented in `algoim/examples/examples_quad.cpp` in a single `main()` engine; compile them with a C++14 compatible compiler of your choice.)
 
 The quadrature algorithms of Algoim are here demonstrated with a level set function describing an ellipse (in `N = 2` dimensions) or ellipsoid (in `N = 3` dimensions). First, we define a function object implementing the level set function:
 
@@ -150,3 +150,7 @@ _Algoim_ is by default configured to use `double` precision arithmetic (`Algoim:
     - To use quadruple-double precision, define `ALGOIM_QDREAL`.
 
 When either of the above preprocessor directives are enabled, `Algoim::Real` becomes a typedef for `dd_real` or `qd_real`. This also affects other internal workings of Algoim, for example, the precomputed Gaussian quadrature schemes in `algoim/src/algoim_gaussquad.hpp` are replaced with _QD_-compatible constants having over 64 digits of accuracy.
+
+## About
+
+_Algoim_ was developed by Robert Saye at [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) as part of his research in numerical methods for high-order accurate interface dynamics, motivated by applications in multi-phase multi-phase. For more information and applications of these algorithms, visit [his research web site](http://math.lbl.gov/~saye/).
