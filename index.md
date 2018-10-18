@@ -135,7 +135,7 @@ double surface_area = q.sumWeights();
 // surface_area ≈ 4.4007
 ```
 
-To visualise a quadrature scheme produced by `Algoim::quadGen`, a tool is provided in `algoim/src/algoim_quad.hpp` which outputs a scheme in the format of an XML VTK `.vtp` file, which one can visualise, e.g., with [ParaView](https://www.paraview.org/). The routine takes as input a user-defined stream, e.g., a `std::ofstream`, and writes XML to the stream, interpreting the quadrature scheme as a scattered set of points with associated weights:
+To visualise a quadrature scheme produced by `Algoim::quadGen`, a tool is provided in `algoim/src/algoim_quad.hpp` which outputs a scheme in the format of an XML VTK `.vtp` file, which one can open with, e.g., with [ParaView](https://www.paraview.org/). The routine takes as input a user-defined stream (e.g., a `std::ofstream`) and writes XML to the stream, interpreting the quadrature scheme as a scattered set of points with associated weights:
 
 ```cpp
 #include <iostream>
@@ -150,15 +150,15 @@ More examples of using Algoim's quadrature code will be added in the future or a
 
 ## Advanced: Double-Double and Quadruple-Double Precision
 
-_Algoim_ is by default configured to use `double` precision arithmetic (`Algoim::Real` is a typedef for `double`). For very high precision applications of the associated high-order accurate algorithms, Algoim can interface to the open-source [QD library](http://crd-legacy.lbl.gov/~dhbailey/mpdist/) which implements software-driven double-double and quadruple-double precision arithmetic. To enable this feature:
+_Algoim_ is by default configured to use `double`-precision arithmetic (`Algoim::Real` is a typedef for `double`). For very high precision applications of the associated high-order accurate algorithms, Algoim can interface to the open-source [QD library](http://crd-legacy.lbl.gov/~dhbailey/mpdist/) which implements software-driven double-double and quadruple-double arithmetic. To enable this feature:
 
-1. Download and install [QD](http://crd-legacy.lbl.gov/~dhbailey/mpdist/) so that your compiler can resolve the necessary includes, e.g., `#include <qd/dd_real.h>` (FIX THIS)
-2. When compiling Algoim-related code, use your compiler to define a global-scope preprocessor directive as follows:
-    - To use double-double precision, define `ALGOIM_DDREAL`. For example, for GCC or ICC, use the compiler argument `-DALGOIMDD_REAL`.
+1. Download and install [QD](http://crd-legacy.lbl.gov/~dhbailey/mpdist/) so that your compiler can resolve the necessary includes, e.g., `#include <qd/dd_real.h>`.
+2. When compiling code using Algoim, define a global-scope preprocessor directive as follows:
+    - To use double-double precision, define `ALGOIM_DDREAL`. For example, for GCC or ICC, use the compiler argument `-DALGOIM_DDREAL`.
     - To use quadruple-double precision, define `ALGOIM_QDREAL`.
 
-When either of the above preprocessor directives are enabled, `Algoim::Real` becomes a typedef for `dd_real` or `qd_real`. This also affects other internal workings of Algoim, for example, the precomputed Gaussian quadrature schemes in `algoim/src/algoim_gaussquad.hpp` are replaced with _QD_-compatible constants having over 64 digits of accuracy.
+When either of the above preprocessor directives are enabled, `Algoim::Real` ceases to be a typedef for `double` and is replaced by a typedef for `dd_real` or `qd_real`. This also affects other internal workings of Algoim, for example, the precomputed Gaussian quadrature schemes in `algoim/src/algoim_gaussquad.hpp` are replaced with _QD_-compatible constants having over 64 digits of accuracy.
 
 ## About
 
-_Algoim_ was developed by [Robert Saye](http://math.lbl.gov/~saye/) at [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) as part of his research in numerical methods for high-order accurate interface dynamics, motivated by applications in multi-phase multi-phase. For more information and applications of these algorithms, visit [his research page](http://math.lbl.gov/~saye/).
+_Algoim_ was developed by [Robert Saye](http://math.lbl.gov/~saye/) in the [Mathematics Group](http://math.lbl.gov) at the [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) as part of his research in numerical methods for high-order accurate interface dynamics and motivated by applications in multi-phase multi-physics. For more information and applications of these algorithms, visit [his research page](http://math.lbl.gov/~saye/).
