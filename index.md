@@ -78,17 +78,13 @@ struct Ellipsoid
     }
 };
 ```
-To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encapsulating the extent of the ellipse, and then apply the functional `x \mapsto 1` to the resulting quadrature rule:
+To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encapsulating the extent of the ellipse, and then apply the functional _f(x) = 1_ to the resulting quadrature rule:
 
 ```C++
 Ellipsoid<2> phi;
 auto q = Algoim::quadGen<Ellipsoid<2>,2>(phi, Algoim::BoundingBox<double,2>(-1.1, 1.1), -1, -1, 4);
-std::cout << "Quad scheme has " << q.nodes.size() << " nodes" << std::endl;
-std::cout << "Volume of ellipsoid as computed by quad scheme: " << q([](const auto& x) { return 1.0; }) << std::endl;
-std::cout << "Exact volume of ellipsoid: 1.570796326794896558" << std::endl;
->>> Quad scheme has 320 nodes
->>> Volume of ellipsoid as computed by quad scheme: 1.5708233709926002764
->>> Exact volume of ellipsoid: 1.570796326794896558
+double area = q([](const auto& x) { return 1.0; });
+>>> (result: area = 1.5708233709926002764; exact area = 1.570796326794896558)
 ```
 
 ## Advanced
