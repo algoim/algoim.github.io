@@ -44,7 +44,7 @@ The provided parameters are as follows:
 - `dim` is used to specify the type of quadrature:
     - If `dim < 0`, compute a **volumetric quadrature scheme**, whose domain is implicitly defined by `{phi < 0}` intersected with `xrange`.
     - If `dim == N`, compute a **curved surface quadrature scheme**, whose domain is implicitly defined by `{phi == 0}` intersected with `xrange`.
-    - If `0 <= dim && dim < N`, compute a **flat surface quadrature schme** for one of the sides of the hyperrectangle, i.e., `{phi < 0}` intersected with `xrange` intersected with the side `{x(dim) == xrange(side)(dim)`.
+    - If `0 <= dim && dim < N`, compute a **flat surface quadrature scheme** for one of the sides of the hyperrectangle, i.e., `{phi < 0}` intersected with `xrange` intersected with the side `{x(dim) == xrange(side)(dim)`.
 - `side` is used only when `0 <= dim && dim < N` and specifies which side, either `side == 0` or `side == 1` for the "left" or "right", respectively.
 - `qo` specifies the degree of the underlying one-dimensional Gaussian quadrature scheme, e.g., `qo = 4` in the figure above. `qo` must satisfy `1 <= qo && qo <= 10`.
 
