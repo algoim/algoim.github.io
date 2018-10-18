@@ -51,9 +51,33 @@ The output of `quadGen` is an `Algoim::QuadratureRule<N>` object. This object is
 
 **Requirements on `phi`.** As mentioned above, the `phi` function object must be able to be applied to arguments of type `blitz::TinyVector<Algoim::Interval<N>,N>`. Here, `Algoim::Interval<N>` is a special type whose purpose is to calculate a first-order Taylor series with bounded remainder, and shares concepts in common with _automatic differentiation_. `Interval<N>` implements `operator+`, `operator*`, `operator/`, etc., and can be used in a variety of ways, most commonly in evaluating polynomial expressions. Common unary operators are also implemented, e.g., `sin(Interval<N>)`. However, one cannot straightforwardly apply `Interval<N>` arithmetic to max or min statements, if conditions, and so forth. This relates to the fact that it is very difficult and subtle to compute quadrature schemes for shapes which have corners, holes, or cusps, etc. In using Algoim quadrature schemes for the first time, it is recommended they be applied to smooth level set functions, made out of polynomial expressions and common smooth functions like `sin`, `exp`, etc.
 
-
 ### Examples
 
+The quadrature algorithms of Algoim are here demonstrated with a level set function describing an ellipse (in `N = 2` dimensions) or ellipsoid (in `N = 3` dimensions). First, we define a function object implementing the requirements above for the level set function:
+
+```
+template<int N>
+struct Ellipsoid
+{
+    template<typename T>
+    T operator() (const blitz::TinyVector<T,N>& x) const
+    {
+        if (N == 2)
+            return x(0)*x(0) + 4.0*x(1)*x(1) - 1.0;
+        else
+            return x(0)*x(0) + 4.0*x(1)*x(1) + 9.0*x(2)*x(2) - 1.0;
+    }
+
+    template<typename T>
+    blitz::TinyVector<T,N> grad(const blitz::TinyVector<T,N>& x) const
+    {
+        if (N == 2)
+            return blitz::TinyVector<T,N>(2.0*x(0), 8.0*x(1));
+        else
+            return blitz::TinyVector<T,N>(2.0*x(0), 8.0*x(1), 18.0*x(2));
+    }
+};
+```
 
 ## Advanced
 
