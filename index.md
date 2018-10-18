@@ -117,7 +117,7 @@ double surface_area = q([](const auto& x) { return 1.0; });
 // surface_area ≈
 ```
 
-To visualise a quadrature scheme computed by `Algoim::quadGen`, provided in `algoim/src/algoim_quad.hpp` is a routine to output an XML stream compatible with [ParaView](https://www.paraview.org/) (file format `.vtp`). The routine takes as input a user-defined stream, e.g., a `std::ofstream`, and writes XML to visualise a quadrature scheme as a scattered set of points with associated weights:
+To visualise a quadrature scheme computed by `Algoim::quadGen`, a tool is provided in `algoim/src/algoim_quad.hpp` which outputs a scheme for visualisation with [ParaView](https://www.paraview.org/) using an XML VTP file format. The routine takes as input a user-defined stream, e.g., a `std::ofstream`, and writes XML to the stream, interpreting the quadrature scheme as a scattered set of points with associated weights:
 
 ```cpp
 #include <iostream>
