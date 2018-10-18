@@ -125,8 +125,7 @@ To visualise a quadrature scheme computed by `Algoim::quadGen`, a tool is provid
 Algoim::QuadratureRule<N> q = ...;
 std::ofstream f("scheme.vtp");
 Algoim::visualiseSchemeAsVtpXML(q, f);
-...
-{ Open scheme.vtp in ParaView }
+// Open scheme.vtp in ParaView
 ```
 
 More examples of using Algoim's quadrature code will be added in the future or as requested.
