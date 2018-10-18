@@ -53,9 +53,9 @@ The output of `quadGen` is an `Algoim::QuadratureRule<N>` object. This object is
 
 ### Examples
 
-The quadrature algorithms of Algoim are here demonstrated with a level set function describing an ellipse (in `N = 2` dimensions) or ellipsoid (in `N = 3` dimensions). First, we define a function object implementing the requirements above for the level set function:
+The quadrature algorithms of Algoim are here demonstrated with a level set function describing an ellipse (in `N = 2` dimensions) or ellipsoid (in `N = 3` dimensions). First, we define a function object implementing the level set function:
 
-```
+```C++
 template<int N>
 struct Ellipsoid
 {
@@ -77,6 +77,18 @@ struct Ellipsoid
             return blitz::TinyVector<T,N>(2.0*x(0), 8.0*x(1), 18.0*x(2));
     }
 };
+```
+To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encasulating the extent of the ellipse:
+
+```C++
+Ellipsoid<2> phi;
+auto q = Algoim::quadGen<Ellipsoid<2>,2>(phi, Algoim::BoundingBox<double,2>(-1.1, 1.1), -1, -1, 4);
+std::cout << "Quad scheme has " << q.nodes.size() << " nodes" << std::endl;
+std::cout << "Volume of ellipsoid as computed by quad scheme: " << q([](const auto& x) { return 1.0; }) << std::endl;
+std::cout << "Exact volume of ellipsoid: 1.570796326794896558" << std::endl;
+>>> Quad scheme has 320 nodes
+>>> Volume of ellipsoid as computed by quad scheme: 1.5708233709926002764
+>>> Exact volume of ellipsoid: 1.570796326794896558
 ```
 
 ## Advanced
