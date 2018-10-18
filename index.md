@@ -81,6 +81,7 @@ struct Ellipsoid
     }
 };
 ```
+
 To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encapsulating the extent of the ellipse, and then apply the functional _f(x) = 1_ to the resulting quadrature rule:
 
 ```cpp
@@ -88,6 +89,41 @@ Ellipsoid<2> phi;
 auto q = Algoim::quadGen<2>(phi, Algoim::BoundingBox<double,2>(-1.1, 1.1), -1, -1, 4);
 double area = q([](const auto& x) { return 1.0; });
 ```
+
+To compute the volume of the ellipsoid in 3D, it is as simple as changing `N`:
+
+```cpp
+Ellipsoid<3> phi;
+auto q = Algoim::quadGen<3>(phi, Algoim::BoundingBox<double,3>(-1.1, 1.1), -1, -1, 4);
+double volume = q([](const auto& x) { return 1.0; });
+```
+
+Each of the two examples above relied on the quadrature scheme's ability to automatically subdivide the given bounding box until the interface geometry can be represented as the graph of a well-defined height function. The subdivision routine terminates as soon as an internal criterion is met (discussed more in the paper cited above). An alternative method revealing asymptotic high-order accuracy is to subdivide the ellipsoid in to a Cartesian grid and apply `quadGen` to individual grid cells, as follows:
+
+```cpp
+code;
+```
+
+To compute the measure of an implicitly defined codimension-one surface, change the `dim` parameter to equal `N`:
+
+```cpp
+Ellipsoid<3> phi;
+auto q = Algoim::quadGen<3>(phi, Algoim::BoundingBox<double,3>(-1.1, 1.1), 3, -1, 4);
+double surface_area = q([](const auto& x) { return 1.0; });
+```
+
+To visualise a quadrature scheme computed by `Algoim::quadGen`, provided in `algoim/src/algoim_quad.hpp` is a routine to output an XML stream compatible with [ParaView](https://www.paraview.org/) (file format `.vtp`). The routine takes as input a user-defined stream, e.g., a `std::ofstream`, and writes XML to visualise a quadrature scheme as a scattered set of points with associated weights:
+
+```cpp
+#include <iostream>
+...
+Algoim::QuadratureRule<N> q = ...;
+std::ofstream f("scheme.vtp");
+Algoim::visualiseSchemeAsVtpXML(q, f);
+...
+{ Open scheme.vtp in ParaView }
+```
+
 This example is implemented in `algoim/examples/quad.cpp` and outputs `area = 1.570823370992600` (the exact area is `1.570796326794897`). 
 
 ## Advanced
