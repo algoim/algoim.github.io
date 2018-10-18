@@ -64,7 +64,7 @@ The output of `quadGen` is an `Algoim::QuadratureRule<N>` object. This object is
 
 ### Examples
 
-**All of these examples are implemented in `algoim/examples/examples_quad.cpp` in a single `main()` engine; compile them with a C++14 compatible compiler of your choice.**
+**All of these examples are implemented in `algoim/examples/examples_quad.cpp` in a single `main()` entry point; compile them with a C++14 compatible compiler of your choice.**
 
 The quadrature algorithms of Algoim are here demonstrated with a level set function describing an ellipse (in `N = 2` dimensions) or ellipsoid (in `N = 3` dimensions). First, we define a function object implementing the level set function:
 
@@ -92,7 +92,7 @@ struct Ellipsoid
 };
 ```
 
-To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encapsulating the extent of the ellipse, and then apply the functional _f(x) = 1_ to the resulting quadrature rule:
+To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encapsulating the extent of the ellipse, and then apply the resulting quadrature rule to the functional _f(x) = 1_:
 
 ```cpp
 Ellipsoid<2> phi;
