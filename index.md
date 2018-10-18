@@ -90,7 +90,7 @@ To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `qu
 Ellipsoid<2> phi;
 auto q = Algoim::quadGen<2>(phi, Algoim::BoundingBox<double,2>(-1.1, 1.1), -1, -1, 4);
 double area = q([](const auto& x) { return 1.0; });
-// area ≈ 
+// area ≈ 1.5708
 ```
 
 To compute the volume of the ellipsoid in 3D, it is as simple as changing `N`:
@@ -99,13 +99,23 @@ To compute the volume of the ellipsoid in 3D, it is as simple as changing `N`:
 Ellipsoid<3> phi;
 auto q = Algoim::quadGen<3>(phi, Algoim::BoundingBox<double,3>(-1.1, 1.1), -1, -1, 4);
 double volume = q([](const auto& x) { return 1.0; });
-// volume ≈
+// volume ≈ 0.69813
 ```
 
-Each of the two examples above relied on the quadrature scheme's ability to automatically subdivide the given bounding box until the interface geometry can be represented as the graph of a well-defined height function. The subdivision routine terminates as soon as an internal criterion is met (discussed more in the paper cited above). An alternative method revealing asymptotic high-order accuracy is to subdivide the ellipsoid in to a Cartesian grid and apply `quadGen` to individual grid cells, as follows:
+Each of the two examples above relied on the quadrature scheme's ability to automatically subdivide the given bounding box until the interface geometry can be represented as the graph of a well-defined height function. The subdivision routine terminates as soon as an internal criterion is met (discussed more in the paper cited above). An alternative method revealing asymptotic high-order accuracy is to subdivide the ellipsoid via a Cartesian grid and apply `quadGen` to individual grid cells, as follows:
 
 ```cpp
-code;
+int n = 16;
+double dx = 2.2 / n;
+Ellipsoid<2> phi;
+double area = 0.0;
+for (int i = 0; i < n; ++i) for (int j = 0; j < n; ++j)
+{
+    blitz::TinyVector<double,2> xmin = {-1.1 + i*dx, -1.1 + j*dx};
+    blitz::TinyVector<double,2> xmax = {-1.1 + i*dx + dx, -1.1 + j*dx + dx};
+    area += Algoim::quadGen<2>(phi, Algoim::BoundingBox<double,2>(xmin, xmax), -1, -1, 4).sumWeights();
+}
+// area ≈ 1.570796327
 ```
 
 To compute the measure of an implicitly defined codimension-one surface, change the `dim` parameter to equal `N`:
@@ -113,8 +123,8 @@ To compute the measure of an implicitly defined codimension-one surface, change 
 ```cpp
 Ellipsoid<3> phi;
 auto q = Algoim::quadGen<3>(phi, Algoim::BoundingBox<double,3>(-1.1, 1.1), 3, -1, 4);
-double surface_area = q([](const auto& x) { return 1.0; });
-// surface_area ≈
+double surface_area = q.sumWeights();
+// surface_area ≈ 4.4007
 ```
 
 To visualise a quadrature scheme computed by `Algoim::quadGen`, a tool is provided in `algoim/src/algoim_quad.hpp` which outputs a scheme for visualisation with [ParaView](https://www.paraview.org/) using an XML VTP file format. The routine takes as input a user-defined stream, e.g., a `std::ofstream`, and writes XML to the stream, interpreting the quadrature scheme as a scattered set of points with associated weights:
