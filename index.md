@@ -32,7 +32,7 @@ If you make use of these quadrature algorithms in your research, in any document
 
 The driver header file for the quadrature algorithms is located at `algoim/src/algoim_quad.hpp`. There is only one driver routine, `quadGen` which is templated on the level set function object `phi` and the dimension `N`:
 
-```C++
+```cpp
 template<typename F, int N>
 Algoim::QuadratureRule<N> Algoim::quadGen(const F& phi, const Algoim::BoundingBox<Real,N>& xrange,
                                           int dim, int side, int qo);
@@ -56,7 +56,7 @@ The output of `quadGen` is an `Algoim::QuadratureRule<N>` object. This object is
 
 The quadrature algorithms of Algoim are here demonstrated with a level set function describing an ellipse (in `N = 2` dimensions) or ellipsoid (in `N = 3` dimensions). First, we define a function object implementing the level set function:
 
-```C++
+```cpp
 template<int N>
 struct Ellipsoid
 {
@@ -81,7 +81,7 @@ struct Ellipsoid
 ```
 To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encapsulating the extent of the ellipse, and then apply the functional _f(x) = 1_ to the resulting quadrature rule:
 
-```C++
+```cpp
 Ellipsoid<2> phi;
 auto q = Algoim::quadGen<Ellipsoid<2>,2>(phi, Algoim::BoundingBox<double,2>(-1.1, 1.1), -1, -1, 4);
 double area = q([](const auto& x) { return 1.0; });
