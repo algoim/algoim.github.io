@@ -85,7 +85,6 @@ To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `qu
 Ellipsoid<2> phi;
 auto q = Algoim::quadGen<Ellipsoid<2>,2>(phi, Algoim::BoundingBox<double,2>(-1.1, 1.1), -1, -1, 4);
 double area = q([](const auto& x) { return 1.0; });
-(result: area = 1.5708233709926002764; exact area = 1.570796326794896558)
 ```
 This example is implemented in `algoim/examples/quad.cpp` and outputs `area = 1.5708233709926002764` (the exact area is `1.570796326794896558`). 
 
