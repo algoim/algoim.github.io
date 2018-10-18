@@ -1,7 +1,7 @@
 _Algoim_ is a collection of high-order accurate numerical methods and C++ algorithms for working with implicitly defined geometry and level set methods. Motivated by multi-phase multi-physics applications, particularly those with evolving dynamic interfaces, these algorithms target core, fundamental techniques in level set methods. They have been designed with a view to standard finite difference implementations as well as more advanced finite element and discontinuous Galerkin implementations, multi-threading and massively parallel MPI computation. The collection includes:
 - High-order accurate quadrature algorithms for implicitly defined domains in hyperrectangles (such as for computing integrals in curved domains or over curved surfaces)
 - High-order accurate closest point calculations to implicitly defined surfaces _(Coming soon...)_
-- k-d trees optimized for codimension-one point clouds _(Coming soon...)_
+- k-d trees optimised for codimension-one point clouds _(Coming soon...)_
 - Accurate level set reinitialization and extension velocity schemes _(Coming soon...)_
 - Voronoi implicit interface methods for multi-phase interconnected interface dynamics _(Coming soon...)_
 
@@ -56,6 +56,8 @@ The output of `quadGen` is an `Algoim::QuadratureRule<N>` object. This object is
 
 ### Examples
 
+(All of these examples are implemented in `algoim/examples/quad.cpp` in a single `main()` engine; compile them with a C++14 compatible compiler of your choice.)
+
 The quadrature algorithms of Algoim are here demonstrated with a level set function describing an ellipse (in `N = 2` dimensions) or ellipsoid (in `N = 3` dimensions). First, we define a function object implementing the level set function:
 
 ```cpp
@@ -88,6 +90,7 @@ To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `qu
 Ellipsoid<2> phi;
 auto q = Algoim::quadGen<2>(phi, Algoim::BoundingBox<double,2>(-1.1, 1.1), -1, -1, 4);
 double area = q([](const auto& x) { return 1.0; });
+// area ≈ 
 ```
 
 To compute the volume of the ellipsoid in 3D, it is as simple as changing `N`:
@@ -96,6 +99,7 @@ To compute the volume of the ellipsoid in 3D, it is as simple as changing `N`:
 Ellipsoid<3> phi;
 auto q = Algoim::quadGen<3>(phi, Algoim::BoundingBox<double,3>(-1.1, 1.1), -1, -1, 4);
 double volume = q([](const auto& x) { return 1.0; });
+// volume ≈
 ```
 
 Each of the two examples above relied on the quadrature scheme's ability to automatically subdivide the given bounding box until the interface geometry can be represented as the graph of a well-defined height function. The subdivision routine terminates as soon as an internal criterion is met (discussed more in the paper cited above). An alternative method revealing asymptotic high-order accuracy is to subdivide the ellipsoid in to a Cartesian grid and apply `quadGen` to individual grid cells, as follows:
@@ -110,6 +114,7 @@ To compute the measure of an implicitly defined codimension-one surface, change 
 Ellipsoid<3> phi;
 auto q = Algoim::quadGen<3>(phi, Algoim::BoundingBox<double,3>(-1.1, 1.1), 3, -1, 4);
 double surface_area = q([](const auto& x) { return 1.0; });
+// surface_area ≈
 ```
 
 To visualise a quadrature scheme computed by `Algoim::quadGen`, provided in `algoim/src/algoim_quad.hpp` is a routine to output an XML stream compatible with [ParaView](https://www.paraview.org/) (file format `.vtp`). The routine takes as input a user-defined stream, e.g., a `std::ofstream`, and writes XML to visualise a quadrature scheme as a scattered set of points with associated weights:
@@ -124,7 +129,7 @@ Algoim::visualiseSchemeAsVtpXML(q, f);
 { Open scheme.vtp in ParaView }
 ```
 
-This example is implemented in `algoim/examples/quad.cpp` and outputs `area = 1.570823370992600` (the exact area is `1.570796326794897`). 
+More examples of using Algoim's quadrature code will be added in the future or as requested.
 
 ## Advanced
 
