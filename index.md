@@ -19,7 +19,7 @@ Clone via
 git clone https://github.com/algoim/algoim.git
 ```
 
-or visit the [GitHub page](https://github.com/algoim/algoim) to download a zip file.
+or visit the [Algoim GitHub page](https://github.com/algoim/algoim).
 
 ## Installation
 
