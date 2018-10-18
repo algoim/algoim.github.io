@@ -9,6 +9,8 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
 
 Many of the numerical algorithms implemented in Algoim are templated on the spatial dimension `N`, allowing one to develop numerical schemes for any number of spatial dimensions. To assist with this functionality, Algoim makes use of the open source C++ library [blitz++](https://github.com/blitzpp/blitz) for high-performance fixed-length vector arithmetic, though `template<typename T, int N> blitz::TinyVector<T,N>`. Therefore, **[blitz++](https://github.com/blitzpp/blitz) should first be downloaded, configured for your compiler, and installed** such that it can be found in the appropriate include directories, i.e., so that `#include <blitz/array.h>` resolves correctly.
 
+In addition, a C++ compiler supporting standard C++14 or higher is required.
+
 ## Installation
 
 Algoim is a header-only C++ library. Except for small example/demonstration applications, all of the files are C++ `.hpp` header files. As such, it requires minimal installation effort: simply download and configure so that the appropriate header driver can be found by your compiler when you include it in your C++ program, e.g., `#include "algoim/src/algoim_quad.hpp"`.
@@ -36,7 +38,6 @@ Algoim::QuadratureRule<N> Algoim::quadGen(const F& phi, const Algoim::BoundingBo
                                           int dim, int side, int qo);
 ```
 The provided parameters are as follows:
-
 - `phi` is a user-defined function object which evaluates the level set function and its gradient. It must implement both `template<typename T> operator() (const blitz::TinyVector<T,N>& x) const` and `template<typename T> grad(const blitz::TinyVector<T,N>& x) const`. In the simplest case, `T = double` and the role of `phi` is to simply evaluate the level set function (e.g., `return x(0)*x(0) + x(1)*x(1) - 1;` for a unit circle) and its gradient (e.g., `return TinyVector<double,2>(2.0*x(0), 2.0*x(1));`). However, it is crucial that these two member functions be templated on `T` in order to enable the interval arithmetic underlying the algorithms of the paper cited above. In essence, the interval arithmetic automatically computes a first-order Taylor series (with bounded remainder) of the given level set function, and uses that to make decisions concerning the existence of the interface and what direction to use when converting the implicitly defined geometry into the graph of an implicitly defined height function. This requirement on `phi` being able to correctly perform interval arithmetic places restrictions on the type of level set functions `quadGen` can be applied to; these restrictions are discussed later.
 - `xrange` is a user-specified bounding box, indicating the extent of the hyperrectangle in `N` dimensions to which the quadrature algorithm is applied.
 - `dim` is used to specify the type of quadrature:
@@ -44,10 +45,12 @@ The provided parameters are as follows:
     - If `dim == N`, compute a **curved surface quadrature scheme**, whose domain is implicitly defined by `{phi == 0}` intersected with `xrange`.
     - If `0 <= dim && dim < N`, compute a **flat surface quadrature schme** for one of the sides of the hyperrectangle, i.e., `{phi < 0}` intersected with `xrange` intersected with the side `{x(dim) == xrange(side)(dim)`.
 - `side` is used only when `0 <= dim && dim < N` and specifies which side, either `side == 0` or `side == 1` for the "left" or "right", respectively.
-- `qo` specifies the degree of the underlying one-dimensional Gaussian quadrature scheme, e.g., `qo = 4` in the figure above.
+- `qo` specifies the degree of the underlying one-dimensional Gaussian quadrature scheme, e.g., `qo = 4` in the figure above. `qo` must satisfy `1 <= qo && qo <= 10`.
 
-main driver
-templated on function object that implements operator and grad, both templated on type to do interval arithmetic
+The output of `quadGen` is an `Algoim::QuadratureRule<N>` object. This object is essentially a `std::vector` listing the set of quadrature points (as `blitz::TinyVector<Real,N>`) and their associated weights. A `QuadratureRule` object is also a function object -- its associated `operator()(const F& f)` can be applied to any user-specified function to compute the result of applying the quadrature rule to a functional.
+
+**Requirements on `phi`.** As mentioned above, the `phi` function object must be able to be applied to arguments of type `blitz::TinyVector<Algoim::Interval<N>,N>`. Here, `Algoim::Interval<N>` is a special type whose purpose is to calculate a first-order Taylor series with bounded remainder, and shares concepts in common with _automatic differentiation_. `Interval<N>` implements `operator+`, `operator*`, `operator/`, etc., and can be used in a variety of ways, most commonly in evaluating polynomial expressions. Common unary operators are also implemented, e.g., `sin(Interval<N>)`. However, one cannot straightforwardly apply `Interval<N>` arithmetic to max or min statements, if conditions, and so forth. This relates to the fact that it is very difficult and subtle to compute quadrature schemes for shapes which have corners, holes, or cusps, etc. In using Algoim quadrature schemes for the first time, it is recommended they be applied to smooth level set functions, made out of polynomial expressions and common smooth functions like `sin`, `exp`, etc.
+
 
 ### Examples
 
