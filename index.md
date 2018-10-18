@@ -78,7 +78,7 @@ struct Ellipsoid
     }
 };
 ```
-To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encasulating the extent of the ellipse:
+To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encapsulating the extent of the ellipse, and then apply the functional `x \mapsto 1` to the resulting quadrature rule:
 
 ```C++
 Ellipsoid<2> phi;
