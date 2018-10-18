@@ -11,6 +11,8 @@ Many of the numerical algorithms implemented in Algoim are templated on the spat
 
 In addition, a C++ compiler supporting standard C++14 or higher is required.
 
+## Download
+
 ## Installation
 
 Algoim is a header-only C++ library. Except for small example/demonstration applications, all of the files are C++ `.hpp` header files. As such, it requires minimal installation effort: simply download and configure so that the appropriate header driver can be found by your compiler when you include it in your C++ program, e.g., `#include "algoim/src/algoim_quad.hpp"`.
