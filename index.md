@@ -37,6 +37,7 @@ template<typename F, int N>
 Algoim::QuadratureRule<N> Algoim::quadGen(const F& phi, const Algoim::BoundingBox<Real,N>& xrange,
                                           int dim, int side, int qo);
 ```
+
 The provided parameters are as follows:
 - `phi` is a user-defined function object which evaluates the level set function and its gradient. It must implement both `template<typename T> operator() (const blitz::TinyVector<T,N>& x) const` and `template<typename T> grad(const blitz::TinyVector<T,N>& x) const`. In the simplest case, `T = double` and the role of `phi` is to simply evaluate the level set function (e.g., `return x(0)*x(0) + x(1)*x(1) - 1;` for a unit circle) and its gradient (e.g., `return TinyVector<double,2>(2.0*x(0), 2.0*x(1));`). However, it is crucial that these two member functions be templated on `T` in order to enable the interval arithmetic underlying the algorithms of the paper cited above. In essence, the interval arithmetic automatically computes a first-order Taylor series (with bounded remainder) of the given level set function, and uses that to make decisions concerning the existence of the interface and what direction to use when converting the implicitly defined geometry into the graph of an implicitly defined height function. This requirement on `phi` being able to correctly perform interval arithmetic places restrictions on the type of level set functions `quadGen` can be applied to; these restrictions are discussed later.
 - `xrange` is a user-specified bounding box, indicating the extent of the hyperrectangle in `N` dimensions to which the quadrature algorithm is applied.
@@ -84,8 +85,9 @@ To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `qu
 Ellipsoid<2> phi;
 auto q = Algoim::quadGen<Ellipsoid<2>,2>(phi, Algoim::BoundingBox<double,2>(-1.1, 1.1), -1, -1, 4);
 double area = q([](const auto& x) { return 1.0; });
->>> (result: area = 1.5708233709926002764; exact area = 1.570796326794896558)
+(result: area = 1.5708233709926002764; exact area = 1.570796326794896558)
 ```
+This example is implemented in `algoim/examples/quad.cpp` and outputs `area = 1.5708233709926002764` (the exact area is `1.570796326794896558`). 
 
 ## Advanced
 
