@@ -1,9 +1,9 @@
 _Algoim_ is a collection of high-order accurate numerical methods and C++ algorithms for working with implicitly defined geometry and level set methods. Motivated by multi-phase multi-physics applications, particularly those with evolving dynamic interfaces, these algorithms target core, fundamental techniques in level set methods. They have been designed with a view to standard finite difference implementations as well as more advanced finite element and discontinuous Galerkin implementations, multi-threading and massively parallel MPI computation. The collection includes:
 - High-order accurate quadrature algorithms for implicitly defined domains in hyperrectangles (such as for computing integrals in curved domains or over curved surfaces)
-- High-order accurate closest point calculations to implicitly defined surfaces _(To be added)_
-- k-d trees optimized for codimension-one point clouds _(To be added)_
-- Accurate level set reinitialization and extension velocity schemes _(To be added)_
-- Voronoi implicit interface methods for multi-phase interconnected interface dynamics _(To be added)_
+- High-order accurate closest point calculations to implicitly defined surfaces _(Coming soon...)_
+- k-d trees optimized for codimension-one point clouds _(Coming soon...)_
+- Accurate level set reinitialization and extension velocity schemes _(Coming soon...)_
+- Voronoi implicit interface methods for multi-phase interconnected interface dynamics _(Coming soon...)_
 
 ## Prerequisites
 
