@@ -33,7 +33,7 @@ If you make use of these quadrature algorithms in your research, in any document
 The driver header file for the quadrature algorithms is located at `algoim/src/algoim_quad.hpp`. There is only one driver routine, `quadGen` which is templated on the level set function object `phi` and the dimension `N`:
 
 ```cpp
-template<typename F, int N>
+template<int N, typename F>
 Algoim::QuadratureRule<N> Algoim::quadGen(const F& phi, const Algoim::BoundingBox<Real,N>& xrange,
                                           int dim, int side, int qo);
 ```
@@ -83,7 +83,7 @@ To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `qu
 
 ```cpp
 Ellipsoid<2> phi;
-auto q = Algoim::quadGen<Ellipsoid<2>,2>(phi, Algoim::BoundingBox<double,2>(-1.1, 1.1), -1, -1, 4);
+auto q = Algoim::quadGen<2>(phi, Algoim::BoundingBox<double,2>(-1.1, 1.1), -1, -1, 4);
 double area = q([](const auto& x) { return 1.0; });
 ```
 This example is implemented in `algoim/examples/quad.cpp` and outputs `area = 1.5708233709926002764` (the exact area is `1.570796326794896558`). 
