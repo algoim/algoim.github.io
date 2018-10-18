@@ -13,6 +13,14 @@ In addition, a C++ compiler supporting standard C++14 or higher is required.
 
 ## Download
 
+Clone via
+
+```
+git clone https://github.com/algoim/algoim.git
+```
+
+or visit the [GitHub page](https://github.com/algoim/algoim) to download a zip file.
+
 ## Installation
 
 Algoim is a header-only C++ library. Except for small example/demonstration applications, all of the files are C++ `.hpp` header files. As such, it requires minimal installation effort: simply download and configure so that the appropriate header driver can be found by your compiler when you include it in your C++ program, e.g., `#include "algoim/src/algoim_quad.hpp"`.
@@ -153,4 +161,4 @@ When either of the above preprocessor directives are enabled, `Algoim::Real` bec
 
 ## About
 
-_Algoim_ was developed by Robert Saye at [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) as part of his research in numerical methods for high-order accurate interface dynamics, motivated by applications in multi-phase multi-phase. For more information and applications of these algorithms, visit [his research web site](http://math.lbl.gov/~saye/).
+_Algoim_ was developed by [Robert Saye](http://math.lbl.gov/~saye/) at [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) as part of his research in numerical methods for high-order accurate interface dynamics, motivated by applications in multi-phase multi-phase. For more information and applications of these algorithms, visit [his research page](http://math.lbl.gov/~saye/).
