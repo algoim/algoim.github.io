@@ -139,4 +139,4 @@ _Algoim_ is by default configured to use `double` precision arithmetic (`Algoim:
     - To use double-double precision, define... For example, for GCC or ICC, use the compiler argument
     - To use quadruple-double precision, define...
 
-When either of the above preprocessor directives are enabled, `Algoim::Real` becomes a typedef for FIX or FIX. This also affects other internal workings of Algoim, for example, the precomputed Gaussian quadrature schemes in `algoim/src/algoim_FIX` are replaced with QD-compatible constants having 69 digits of accuracy.
+When either of the above preprocessor directives are enabled, `Algoim::Real` becomes a typedef for FIX or FIX. This also affects other internal workings of Algoim, for example, the precomputed Gaussian quadrature schemes in `algoim/src/algoim_FIX` are replaced with QD-compatible constants having over 64 digits of accuracy.
