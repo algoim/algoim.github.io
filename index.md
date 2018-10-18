@@ -132,8 +132,8 @@ More examples of using Algoim's quadrature code will be added in the future or a
 
 ## Advanced: Double-Double and Quadruple-Double Precision
 
-_Algoim_ is by default configured to use `double` precision arithmetic. For very high precision applications of the associated high-order accurate algorithms, Algoim can interface to the open-source library [QD](http://crd-legacy.lbl.gov/~dhbailey/mpdist/) developed at LBNL, which implements software-driven double-double and quadruple-double precision arithmetic. To enable this feature:
+_Algoim_ is by default configured to use `double` precision arithmetic (`Algoim::Real` is a typedef for `double`). For very high precision applications of the associated high-order accurate algorithms, Algoim can interface to the open-source [QD library](http://crd-legacy.lbl.gov/~dhbailey/mpdist/) which implements software-driven double-double and quadruple-double precision arithmetic. To enable this feature:
 
 <ol><li>Download and install [QD](http://crd-legacy.lbl.gov/~dhbailey/mpdist/) so that your compiler can resolve the necessary includes, e.g., `#include <qd/` (FIX THIS)</li><li>When compiling Algoim-related code, use your compiler to define a global-scope preprocessor directive for `ALGOIM_HPREAL` as follows:<ul><li>To use double-double precision, define...</li><li>To use quadruple-double precision, define...</li></ul>For example...</li></ol>
 
-Internally, in `algoim/src/algoim_real.hpp`, the type `Algoim::Real` is by default a typedef for `double`. When either of these preprocessor directives are enabled, `Algoim::Real` becomes a typedef for FIX or FIX. This also affects other internal workings of Algoim, for example, the precomputed Gaussian quadrature schemes in `algoim/src/algoim_FIX` are replaced with QD-compatible constants having 69 digits of accuracy.
+When either of the above preprocessor directives are enabled, `Algoim::Real` becomes a typedef for FIX or FIX. This also affects other internal workings of Algoim, for example, the precomputed Gaussian quadrature schemes in `algoim/src/algoim_FIX` are replaced with QD-compatible constants having 69 digits of accuracy.
