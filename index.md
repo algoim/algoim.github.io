@@ -58,7 +58,7 @@ The provided parameters are as follows:
 - `side` is used only when `0 <= dim && dim < N` and specifies which side of the hyperrectangle to restrict to, either `side == 0` or `side == 1` for the "left" or "right" face, respectively (with normal pointing in the direction of the `dim`-th axis).
 - `qo` specifies the degree of the underlying one-dimensional Gaussian quadrature scheme and must satisfy `1 <= qo && qo <= 10`. For example, `qo = 4` in the figure above.
 
-The output of `quadGen` is an `Algoim::QuadratureRule<N>` object. This object is essentially a `std::vector` listing the set of quadrature points (as `blitz::TinyVector<Real,N>`) and their corresponding weights. A `QuadratureRule` object is also a functor -- its associated templated member function `operator()(const F& f)` can be applied to any user-specified function to compute the result of applying the quadrature rule to a functional.
+The output of `quadGen` is an `Algoim::QuadratureRule<N>` object. This object is essentially a `std::vector` listing the set of quadrature points (as `blitz::TinyVector<Real,N>`) and their corresponding weights. A `QuadratureRule` object is also a functor -- its associated templated member function `operator()(const F& f)` can be applied to any user-specified integrand function to compute the result of applying the quadrature rule to a functional.
 
 **Requirements on `phi`.** As mentioned above, the `phi` functor must be able to accept arguments of type `blitz::TinyVector<Algoim::Interval<N>,N>`. Here, `Algoim::Interval<N>` is a special type whose purpose is to calculate a first-order Taylor series with bounded remainder, and shares concepts in common with automatic differentiation (see the paper cited above for more details). `Interval<N>` implements `operator+`, `operator*`, `operator/`, etc., and can be used in a variety of ways, most commonly in evaluating polynomial expressions. Common unary operators are also implemented, e.g., `sin(Interval<N>)` and `exp(Interval<N>)`. However, one cannot straightforwardly apply `Interval<N>` arithmetic to max or min statements, if conditions, and other non-standard or non-smooth functions. This relates to the fact that it is very difficult and subtle to compute quadrature schemes for shapes which have corners, holes, or cusps, etc. In using Algoim quadrature schemes for the first time, it is recommended they be applied to smooth level set functions made out of polynomial expressions and common smooth functions like `sin`, `exp`, etc.
 
@@ -92,7 +92,7 @@ struct Ellipsoid
 };
 ```
 
-To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encapsulating the extent of the ellipse, and then apply the resulting quadrature rule to the functional _f(x) = 1_:
+To compute the area of the ellipse in 2D using a scheme with `qo = 4`, apply `quadGen` to a bounding box encapsulating the extent of the ellipse, and then apply the resulting quadrature rule to the integrand _f(x) = 1_:
 
 ```cpp
 Ellipsoid<2> phi;
@@ -135,7 +135,7 @@ double surface_area = q.sumWeights();
 // surface_area ≈ 4.4007
 ```
 
-To visualise a quadrature scheme computed by `Algoim::quadGen`, a tool is provided in `algoim/src/algoim_quad.hpp` which outputs a scheme for visualisation with [ParaView](https://www.paraview.org/) using an XML VTP file format. The routine takes as input a user-defined stream, e.g., a `std::ofstream`, and writes XML to the stream, interpreting the quadrature scheme as a scattered set of points with associated weights:
+To visualise a quadrature scheme produced by `Algoim::quadGen`, a tool is provided in `algoim/src/algoim_quad.hpp` which outputs a scheme in the format of an XML VTK `.vtp` file, which one can visualise, e.g., with [ParaView](https://www.paraview.org/). The routine takes as input a user-defined stream, e.g., a `std::ofstream`, and writes XML to the stream, interpreting the quadrature scheme as a scattered set of points with associated weights:
 
 ```cpp
 #include <iostream>
