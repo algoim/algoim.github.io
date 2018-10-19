@@ -9,6 +9,13 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
 
 - [Prerequisites](#prerequisites)
 - [Download](#download)
+- [Installation](#installation)
+- [High-Order Quadrature Algorithms for Implicitly Defined Domains](#quad)
+    * [Citing](#quadciting)
+    * [Usage](#quadusage)
+    * [Examples](#quadexamples)
+- [Advanced: Double-Double and Quadruple-Double Precision](#advanced)
+- [About](#about)    
 
 ## Prerequisites
 
