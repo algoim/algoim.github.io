@@ -5,18 +5,16 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
 - Accurate level set reinitialisation and extension velocity schemes _(Coming soon...)_
 - Voronoi implicit interface methods for multi-phase interconnected interface dynamics _(Coming soon...)_
 
-{:toc}
-
 ## Contents
 
 - [Prerequisites](#prerequisites)
 - [Download](#download)
 - [Installation](#installation)
-- [High-Order Quadrature Algorithms for Implicitly Defined Domains](#quad)
-    * [Citing](#quadciting)
-    * [Usage](#quadusage)
-    * [Examples](#quadexamples)
-- [Advanced: Double-Double and Quadruple-Double Precision](#advanced)
+- [High-Order Quadrature Algorithms for Implicitly Defined Domains](#high-order-quadrature-algorithms-for-implicitly-defined-domains)
+    * [Citing](#citing)
+    * [Usage](#usage)
+    * [Examples](#examples)
+- [Advanced: Double-Double and Quadruple-Double Precision](#advanced-double-double-and-quadruple-double-precision)
 - [About](#about)    
 
 ## Prerequisites
