@@ -138,7 +138,7 @@ double surface_area = q.sumWeights();
 To visualise a quadrature scheme produced by `Algoim::quadGen`, a tool is provided in `algoim/src/algoim_quad.hpp` which outputs a scheme in the format of an XML VTK `.vtp` file, which one can open with, e.g., with [ParaView](https://www.paraview.org/). The routine takes as input a user-defined stream (e.g., a `std::ofstream`) and writes XML to the stream, interpreting the quadrature scheme as a scattered set of points with associated weights:
 
 ```cpp
-#include <iostream>
+#include <fstream>
 ...
 Algoim::QuadratureRule<N> q = ...;
 std::ofstream f("scheme.vtp");
