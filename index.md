@@ -5,6 +5,11 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
 - Accurate level set reinitialisation and extension velocity schemes _(Coming soon...)_
 - Voronoi implicit interface methods for multi-phase interconnected interface dynamics _(Coming soon...)_
 
+## Contents
+
+- [Prerequisites](#prerequisites)
+- [Download](#download)
+
 ## Prerequisites
 
 Many of the numerical algorithms implemented in Algoim are templated on the spatial dimension `N`, allowing one to develop numerical schemes for any number of spatial dimensions. To assist with this functionality, Algoim makes use of the open source C++ library [blitz++](https://github.com/blitzpp/blitz) for high-performance fixed-length vector arithmetic, through `template<typename T, int N> blitz::TinyVector<T,N>`. Therefore, **[blitz++](https://github.com/blitzpp/blitz) should first be downloaded, configured for your compiler, and installed** such that it can be found in the appropriate include directories, i.e., so that `#include <blitz/array.h>` resolves correctly.
