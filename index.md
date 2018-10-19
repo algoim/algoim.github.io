@@ -5,6 +5,8 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
 - Accurate level set reinitialisation and extension velocity schemes _(Coming soon...)_
 - Voronoi implicit interface methods for multi-phase interconnected interface dynamics _(Coming soon...)_
 
+{:toc}
+
 ## Contents
 
 - [Prerequisites](#prerequisites)
