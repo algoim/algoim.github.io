@@ -173,9 +173,9 @@ Numerical methods making use of this idea often require accurate approximations 
 
 Provided in Algoim is C++ code implementing the algorithms developed in the paper. These algorithms can be used to implement, for example, high-order accurate reinitialisation/redistancing algorithms in level set methods. The code mainly applies to the case that the level set function is defined on a rectangular Cartesian grid. However, as discussed in the paper, it is possible to extend the algorithms to the case of unstructured grids - one could use the code as a starting point. For example, the implementations of the k-d tree and Newton's method could be used as-is without modification in such an adaptation.
 
-<div style="width:502px; margin: 0 auto; font-size: 70%"><img src="img-reinit.png"/><br/>Reinitialising a two-dimensional level set function [1]. (left) Contour plot of a function which implicitly defines an elliptical interface (black curve). (right) Contour plot of the corresponding reinitialised signed distance function.</div>
+<div style="width:521px; margin: 0 auto; font-size: 70%"><img src="img-reinit.png"/><br/>Reinitialising a two-dimensional level set function [1]. (left) Contour plot of a function which implicitly defines an elliptical interface (black curve). (right) Contour plot of the corresponding reinitialised signed distance function.</div>
 
-<div style="width:502px; margin: 0 auto; font-size: 70%"><img src="img-droplet.png"/><br/>Level sets of a signed distance function reconstructed from the surface shown in grey [1]. This example was constructed from a small 5 by 5 by 5 patch of grid cells, in such a way that the droplet on the right is completely contained within one grid cell. Subgrid details such as this are important in high-order methods involving implicitly-defined geometry.</div>
+<div style="width:400px; margin: 0 auto; font-size: 70%"><img src="img-droplet.png"/><br/>Level sets of a signed distance function reconstructed from the surface shown in grey [1]. This example was constructed from a small 5 by 5 by 5 patch of grid cells, in such a way that the droplet on the right is completely contained within one grid cell. Subgrid details such as this are important in high-order methods involving implicitly-defined geometry.</div>
 
 ### Citing
 
