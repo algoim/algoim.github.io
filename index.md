@@ -194,10 +194,9 @@ A typical framework using these algorithms operates in two steps. First, in a se
 
 ### Examples
 
-These ideas are demonstrated in two example programs:
-- `algoim/examples/examples_hocp_simple.cpp`: This program demonstrates a very simple problem of reinitialising a level set function in 2D and 3D. Type in a dimension (2 or 3) and the number of grid points in each axis to have the program reinitialise a spherical interface level set function and report the maximum-norm error of the computed signed distance function.
+These ideas are demonstrated in two example programs. **Each `cpp` file contains a single `main()` entry point; compile them (individually) with a C++14 compatible compiler of your choice.**
+- `algoim/examples/examples_hocp_simple.cpp`: The code demonstrates a very simple problem of reinitialising a level set function in 2D and 3D. Type in a dimension (2 or 3) and the number of grid points in each axis to have the program reinitialise a spherical interface level set function and report the maximum-norm error of the computed signed distance function.
 - `algoim/examples/examples_hocp_convergence.cpp`: This program implements a series of convergence tests on different interface geometries and can be used to replicate the results in the above cited paper. Use it by specifying the test problem via command-line parameters – for example, `./examples_hocp_convergence 2 sphere` or `./examples_hocp_convergence 3 ellipsoid`.
-
 
 ## k-d Trees Optimised for Codimension-One Point Clouds
 
