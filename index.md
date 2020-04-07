@@ -1,8 +1,8 @@
 _Algoim_ is a collection of high-order accurate numerical methods and C++ algorithms for working with implicitly defined geometry and level set methods. Motivated by multi-phase multi-physics applications, particularly those with evolving dynamic interfaces, these algorithms target core, fundamental techniques in level set methods. They have been designed with a view to standard finite difference implementations as well as more advanced finite element and discontinuous Galerkin implementations, multi-threading and massively parallel MPI computation. The collection includes:
 - High-order accurate quadrature algorithms for implicitly defined domains in hyperrectangles, for example in computing integrals over curved surfaces or domains.
-- High-order accurate closest point calculations to implicitly defined surfaces _(Coming soon...)_
-- k-d trees optimised for codimension-one point clouds _(Coming soon...)_
-- Accurate level set reinitialisation and extension velocity schemes _(Coming soon...)_
+- High-order accurate closest point calculations to implicitly defined surfaces
+- k-d trees optimised for codimension-one point clouds
+- Accurate level set reinitialisation and extension velocity schemes
 - Voronoi implicit interface methods for multi-phase interconnected interface dynamics _(Coming soon...)_
 
 ## Contents
@@ -159,6 +159,65 @@ Algoim::outputQuadratureRuleAsVtpXML(q, f);
 ```
 
 More examples of using Algoim's quadrature code will be added in the future or as requested.
+
+## High-Order Algorithms for Computing Closest points on Implicitly-Defined Surfaces
+
+A powerful technique for representing curves in two dimensions (`N = 2`) and surfaces in three dimension (`N = 3`) is to define them implicitly as a level set of a continuous, `N`-dimensional scalar function. This technique of embedding the surface geometry in a higher-dimensional function (which is often called the "level set function") leads to a wide array of mathematical and computational advantages, as exemplified by the [level set method](http://en.wikipedia.org/wiki/Level_set_method) for moving interface problems, and the [Voronoi implicit interface method](http://math.lbl.gov/~saye/research-viim.html) for computing multiphase interface evolution.
+
+Numerical methods making use of this idea often require accurate approximations of minimum distances to implicitly defined surfaces. High-order accurate algorithms for this purpose are described in the paper [R. I. Saye, _High-order methods for computing distances to implicitly defined surfaces_, Communications in Applied Mathematics and Computational Science, 9(1), 107-141 (2014)](http://dx.doi.org/10.2140/camcos.2014.9.107)
+
+Provided in Algoim is C++ code implementing the algorithms developed in the paper. These algorithms can be used to implement, for example, high-order accurate reinitialisation/redistancing algorithms in level set methods. The code mainly applies to the case that the level set function is defined on a rectangular Cartesian grid. However, as discussed in the paper, it is possible to extend the algorithms to the case of unstructured grids - one could use the code as a starting point. For example, the implementations of the k-d tree and Newton's method could be used as-is without modification in such an adaptation.
+
+<div style="width:502px; margin: 0 auto; font-size: 70%"><img src="img-reinit.png"/><br/>Reinitialising a two-dimensional level set function [1]. (left) Contour plot of a function which implicitly defines an elliptical interface (black curve). (right) Contour plot of the corresponding reinitialised signed distance function.</div>
+
+<div style="width:502px; margin: 0 auto; font-size: 70%"><img src="img-droplet.png"/><br/>Level sets of a signed distance function reconstructed from the surface shown in grey [1]. This example was constructed from a small 5 by 5 by 5 patch of grid cells, in such a way that the droplet on the right is completely contained within one grid cell. Subgrid details such as this are important in high-order methods involving implicitly-defined geometry.</div>
+
+### Citing
+
+If you make use of these high-order closest point algorithms in your research, in any documentation or publication please cite - in addition to _Algoim_ - the original paper describing these algorithms:
+- [R. I. Saye, _High-order methods for computing distances to implicitly defined surfaces_, Communications in Applied Mathematics and Computational Science, 9(1), 107-141 (2014)](http://dx.doi.org/10.2140/camcos.2014.9.107)
+
+### Usage
+
+The high-order quadrature algorithms are located in a number of header files:
+- `algoim/src/algoim_newtoncp.hpp`: Newton's method for the constrained minimum-distance optimisation problem applied to finding closest points on the zero level set of a function (typically a polynomial).
+- `algoim/src/algoim_stencilpoly.hpp`: Implements the least-squares polynomial interpolation algorithms for 10 different classes of polynomial in 2D and 3D, including bicubic and tricubic interpolants.
+- `algoim/src/algoim_stencilpoly_detail.hpp`: This file contains the precomputed pseudoinverses of the interpolation matrices and the various stencils for performing least-squares polynomial interpolation on a rectangular Cartesian grid, as described in the paper.
+- `algoim/src/algoim_kdtree.hpp`: Implements a k-d tree data structure for a given collection of points in `R^N`. This particular k-d tree has been optimised for clouds of points that originate from smooth codimension-one surfaces using coordinate transformations that result in "tight" bounding boxes for nodes in the tree. More details are provided HERE.
+- `algoim/src/algoim_hocp.hpp`: Main driver routines for the high-order closest point algorithm applied to rectangular Cartesian grids.
+
+A typical framework using these algorithms operates in two steps. First, in a setup phase, a `Algoim::KDTree` is created based on a cloud of seed points approximately sampling the interface. Second, for a closest point query, given a point `x`, the closest seed point to `x` is found using the `Algoim::KDTree` and this is then "polished" using Newton's method (`Algoim::newtonCP`) applied to piecewise polynomial interpolants of the level set function (`Algoim::StencilPoly<N,Degree>` or equivalent). 
+
+### Examples
+
+These ideas are demonstrated in two example programs:
+- `algoim/examples/examples_hocp_simple.cpp`: This program demonstrates a very simple problem of reinitialising a level set function in 2D and 3D. Type in a dimension (2 or 3) and the number of grid points in each axis to have the program reinitialise a spherical interface level set function and report the maximum-norm error of the computed signed distance function.
+- `algoim/examples/examples_hocp_convergence.cpp`: This program implements a series of convergence tests on different interface geometries and can be used to replicate the results in the above cited paper. Use it by specifying the test problem via command-line parameters – for example, `./examples_hocp_convergence 2 sphere` or `./examples_hocp_convergence 3 ellipsoid`.
+
+
+## k-d Trees Optimised for Codimension-One Point Clouds
+
+[k-d trees](https://en.wikipedia.org/wiki/K-d_tree) are one of the most effective data structures for determining closest points in a cloud of scattered point data. In its standard form, a k-d tree recursively subdivides the cloud of points along alternating axes. If the cloud of points originates from a smooth codimension-one surface (e.g., a sphere in 3D) another possibility arises to further tune and optimise the performance of a k-d tree, by orienting the dividing hyperplane perpendicular to the tangent surface. This idea is further detailed in the paper in the paper [R. I. Saye, _High-order methods for computing distances to implicitly defined surfaces_, Communications in Applied Mathematics and Computational Science, 9(1), 107-141 (2014)](http://dx.doi.org/10.2140/camcos.2014.9.107) and an implementation of the resulting k-d tree optimised for codimension-one point clouds is given in Algoim's `algoim/src/algoim_kdtree.hpp`.
+
+An example of its usage is as follows.
+
+```cpp
+#include "algoim/src/algoim_kdtree.hpp"
+...
+// Generate a random set of points on the surface of the sphere
+std::vector<TinyVector<double,3>> pts;
+for (int i = 0; i < 1000; ++i)
+{
+    TinyVector<double,3> x(rand(), rand(), rand());
+    pts.push_back(x / mag(x));
+}
+// Build a kdtree
+Algoim::KDTree<double,3> tree(pts);
+// Find the closest point to some query, y
+TinyVector<double,3> y(rand(), rand(), rand());
+int ind = tree.nearest(y);
+// The closest point is then pts[ind]
+```
 
 ## Advanced: Double-Double and Quadruple-Double Precision
 
