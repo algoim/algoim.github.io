@@ -18,7 +18,7 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
     * [Citing](#citing-1)
     * [Usage](#usage-1)
     * [Examples](#examples-1)
-- [k-d Trees Optimised for Codimension-One Point Clouds](#k-d-trees-optimised-for-codimension-one-point-clouds")
+- [k-d Trees Optimised for Codimension-One Point Clouds](#k-d-trees-optimised-for-codimension-one-point-clouds)
 - [Advanced: Double-Double and Quadruple-Double Precision](#advanced-double-double-and-quadruple-double-precision)
 - [About](#about)    
 
