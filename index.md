@@ -14,6 +14,11 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
     * [Citing](#citing)
     * [Usage](#usage)
     * [Examples](#examples)
+- [High-Order Algorithms for Computing Closest Points on Implicitly-Defined Surfaces](#high-order-algorithms-for-computing-closest-points-on-implicitly-defined-surfaces)
+    * [Citing](#citing-1)
+    * [Usage](#usage-1)
+    * [Examples](#examples-1)
+- [k-d Trees Optimised for Codimension-One Point Clouds](#k-d-trees-optimised-for-codimension-one-point-clouds")
 - [Advanced: Double-Double and Quadruple-Double Precision](#advanced-double-double-and-quadruple-double-precision)
 - [About](#about)    
 
@@ -160,7 +165,7 @@ Algoim::outputQuadratureRuleAsVtpXML(q, f);
 
 More examples of using Algoim's quadrature code will be added in the future or as requested.
 
-## High-Order Algorithms for Computing Closest points on Implicitly-Defined Surfaces
+## High-Order Algorithms for Computing Closest Points on Implicitly-Defined Surfaces
 
 A powerful technique for representing curves in two dimensions (`N = 2`) and surfaces in three dimension (`N = 3`) is to define them implicitly as a level set of a continuous, `N`-dimensional scalar function. This technique of embedding the surface geometry in a higher-dimensional function (which is often called the "level set function") leads to a wide array of mathematical and computational advantages, as exemplified by the [level set method](http://en.wikipedia.org/wiki/Level_set_method) for moving interface problems, and the [Voronoi implicit interface method](http://math.lbl.gov/~saye/research-viim.html) for computing multiphase interface evolution.
 
