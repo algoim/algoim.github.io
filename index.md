@@ -168,7 +168,7 @@ More examples of using Algoim's quadrature code will be added in the future or a
 
 A powerful technique for representing curves in two dimensions (`N = 2`) and surfaces in three dimension (`N = 3`) is to define them implicitly as a level set of a continuous, `N`-dimensional scalar function. This technique of embedding the surface geometry in a higher-dimensional function (which is often called the "level set function") leads to a wide array of mathematical and computational advantages, as exemplified by the [level set method](http://en.wikipedia.org/wiki/Level_set_method) for moving interface problems, and the [Voronoi implicit interface method](http://dx.doi.org/10.1073/pnas.1111557108) for computing multiphase interface evolution.
 
-Numerical methods making use of this idea often require accurate approximations of minimum distances to implicitly defined surfaces. High-order accurate algorithms for this purpose are described in the paper [R. I. Saye, _High-order methods for computing distances to implicitly defined surfaces, Communications in Applied Mathematics and Computational Science, 9(1), 107-141 (2014)](http://dx.doi.org/10.2140/camcos.2014.9.107)
+Numerical methods making use of this idea often require accurate approximations of minimum distances to implicitly defined surfaces. High-order accurate algorithms for this purpose are described in the paper [R. I. Saye, _High-order methods for computing distances to implicitly defined surfaces_, Communications in Applied Mathematics and Computational Science, 9(1), 107-141 (2014)](http://dx.doi.org/10.2140/camcos.2014.9.107)
 
 Provided in Algoim is C++ code implementing the algorithms developed in the paper. These algorithms can be used to implement, for example, high-order accurate reinitialisation/redistancing algorithms in level set methods. The code mainly applies to the case that the level set function is defined on a rectangular Cartesian grid. However, as discussed in the paper, it is possible to extend the algorithms to the case of unstructured grids - one could use the code as a starting point. For example, the implementations of the k-d tree and Newton's method could be used as-is without modification in such an adaptation.
 
@@ -179,7 +179,7 @@ Provided in Algoim is C++ code implementing the algorithms developed in the pape
 ### Citing
 
 If you make use of these high-order closest point algorithms in your research, in any documentation or publication please cite - in addition to _Algoim_ - the original paper describing these algorithms:
-- [R. I. Saye, _High-order methods for computing distances to implicitly defined surfaces, Communications in Applied Mathematics and Computational Science, 9(1), 107-141 (2014)](http://dx.doi.org/10.2140/camcos.2014.9.107)
+- [R. I. Saye, _High-order methods for computing distances to implicitly defined surfaces_, Communications in Applied Mathematics and Computational Science, 9(1), 107-141 (2014)](http://dx.doi.org/10.2140/camcos.2014.9.107)
 
 ### Usage
 
@@ -200,7 +200,7 @@ These ideas are demonstrated in two example programs. **Each `cpp` file contains
 
 ## k-d Trees Optimised for Codimension-One Point Clouds
 
-[k-d trees](https://en.wikipedia.org/wiki/K-d_tree) are one of the most effective data structures for finding the closest point in a cloud of scattered points (i.e., a nearest-neighbour search). In its standard form, a k-d tree recursively subdivides the cloud of points along alternating axes. If the point data is situated on or near a smooth codimension-one surface (e.g., a sphere in 3D), the performance of a k-d tree can be further optimised by using approximations of the surface tangent hyperplane. This idea is further detailed in the paper [R. I. Saye, _High-order methods for computing distances to implicitly defined surfaces, Communications in Applied Mathematics and Computational Science, 9(1), 107-141 (2014)](http://dx.doi.org/10.2140/camcos.2014.9.107) and an implementation of the resulting k-d tree optimised for codimension-one point clouds is given in Algoim's `algoim/src/algoim_kdtree.hpp`.
+[k-d trees](https://en.wikipedia.org/wiki/K-d_tree) are one of the most effective data structures for finding the closest point in a cloud of scattered points (i.e., a nearest-neighbour search). In its standard form, a k-d tree recursively subdivides the cloud of points along alternating axes. If the point data is situated on or near a smooth codimension-one surface (e.g., a sphere in 3D), the performance of a k-d tree can be further optimised by using approximations of the surface tangent hyperplane. This idea is further detailed in the paper [R. I. Saye, _High-order methods for computing distances to implicitly defined surfaces_, Communications in Applied Mathematics and Computational Science, 9(1), 107-141 (2014)](http://dx.doi.org/10.2140/camcos.2014.9.107) and an implementation of the resulting k-d tree optimised for codimension-one point clouds is given in Algoim's `algoim/src/algoim_kdtree.hpp`.
 
 An example of its usage is as follows.
 
