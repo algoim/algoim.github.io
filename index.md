@@ -1,8 +1,7 @@
 _Algoim_ is a collection of high-order accurate numerical methods and C++ algorithms for working with implicitly defined geometry and level set methods. Motivated by multi-phase multi-physics applications, particularly those with evolving dynamic interfaces, these algorithms target core, fundamental techniques in level set methods. They have been designed with a view to standard finite difference implementations as well as more advanced finite element and discontinuous Galerkin implementations, multi-threading and massively parallel MPI computation. The collection includes:
 - High-order accurate quadrature algorithms for implicitly defined domains in hyperrectangles, for example in computing integrals over curved surfaces or domains.
-- High-order accurate closest point calculations to implicitly defined surfaces
-- k-d trees optimised for codimension-one point clouds
-- Accurate level set reinitialisation and extension velocity schemes
+- High-order accurate algorithms for computing closest points on implicitly defined surfaces, including high-order level set reinitialisation and extension velocity schemes.
+- k-d trees optimised for codimension-one point clouds.
 - Voronoi implicit interface methods for multi-phase interconnected interface dynamics _(Coming soon...)_
 
 ## Contents
@@ -160,20 +159,22 @@ To visualise a quadrature scheme produced by `Algoim::quadGen`, a tool is provid
 Algoim::QuadratureRule<N> q = ...;
 std::ofstream f("scheme.vtp");
 Algoim::outputQuadratureRuleAsVtpXML(q, f);
-// Open scheme.vtp in ParaView
+// Open 'scheme.vtp' in ParaView
 ```
 
 More examples of using Algoim's quadrature code will be added in the future or as requested.
 
 ## High-Order Algorithms for Computing Closest Points on Implicitly-Defined Surfaces
 
-A powerful technique for representing curves in two dimensions (`N = 2`) and surfaces in three dimension (`N = 3`) is to define them implicitly as a level set of a continuous, `N`-dimensional scalar function. This technique of embedding the surface geometry in a higher-dimensional function (which is often called the "level set function") leads to a wide array of mathematical and computational advantages, as exemplified by the [level set method](http://en.wikipedia.org/wiki/Level_set_method) for moving interface problems, and the [Voronoi implicit interface method](http://math.lbl.gov/~saye/research-viim.html) for computing multiphase interface evolution.
+A powerful technique for representing curves in two dimensions (`N = 2`) and surfaces in three dimension (`N = 3`) is to define them implicitly as a level set of a continuous, `N`-dimensional scalar function. This technique of embedding the surface geometry in a higher-dimensional function (which is often called the "level set function") leads to a wide array of mathematical and computational advantages, as exemplified by the [level set method](http://en.wikipedia.org/wiki/Level_set_method) for moving interface problems, and the [Voronoi implicit interface method](http://dx.doi.org/10.1007/s00032-012-0187-6) for computing multiphase interface evolution.
 
 Numerical methods making use of this idea often require accurate approximations of minimum distances to implicitly defined surfaces. High-order accurate algorithms for this purpose are described in the paper [R. I. Saye, _High-order methods for computing distances to implicitly defined surfaces_, Communications in Applied Mathematics and Computational Science, 9(1), 107-141 (2014)](http://dx.doi.org/10.2140/camcos.2014.9.107)
 
 Provided in Algoim is C++ code implementing the algorithms developed in the paper. These algorithms can be used to implement, for example, high-order accurate reinitialisation/redistancing algorithms in level set methods. The code mainly applies to the case that the level set function is defined on a rectangular Cartesian grid. However, as discussed in the paper, it is possible to extend the algorithms to the case of unstructured grids - one could use the code as a starting point. For example, the implementations of the k-d tree and Newton's method could be used as-is without modification in such an adaptation.
 
 <div style="width:521px; margin: 0 auto; font-size: 70%"><img src="img-reinit.png"/><br/>Reinitialising a two-dimensional level set function [1]. (left) Contour plot of a function which implicitly defines an elliptical interface (black curve). (right) Contour plot of the corresponding reinitialised signed distance function.</div>
+
+<br/>
 
 <div style="width:400px; margin: 0 auto; font-size: 70%"><img src="img-droplet.png"/><br/>Level sets of a signed distance function reconstructed from the surface shown in grey [1]. This example was constructed from a small 5 by 5 by 5 patch of grid cells, in such a way that the droplet on the right is completely contained within one grid cell. Subgrid details such as this are important in high-order methods involving implicitly-defined geometry.</div>
 
