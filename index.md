@@ -207,16 +207,16 @@ An example of its usage is as follows.
 ```cpp
 #include "algoim/src/algoim_kdtree.hpp"
 ...
-// Generate a random set of points on the surface of the sphere
+// Generate a random set of points on the surface of a sphere
 std::vector<TinyVector<double,3>> pts;
 for (int i = 0; i < 1000; ++i)
 {
     TinyVector<double,3> x(rand(), rand(), rand());
     pts.push_back(x / mag(x));
 }
-// Build a kdtree
+// Build a kdtree of the point cloud
 Algoim::KDTree<double,3> tree(pts);
-// Find the closest point to some query, y
+// Find the closest point to some query point y
 TinyVector<double,3> y(rand(), rand(), rand());
 int ind = tree.nearest(y);
 // The closest point is then pts[ind]
