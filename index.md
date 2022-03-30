@@ -3,6 +3,9 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
 - High-order accurate algorithms for computing closest points on implicitly defined surfaces, for use in, e.g, high-order level set reinitialisation and extension velocity schemes.
 - k-d trees optimised for codimension-one point clouds.
 
+## Contents (auto-generated)
+
+{:toc}
 
 ## Contents
 
