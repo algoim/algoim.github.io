@@ -5,6 +5,7 @@ _Algoim_ is a collection of high-order accurate numerical methods and C++ algori
 
 ## Contents (auto-generated)
 
+* toc
 {:toc}
 
 ## Contents
