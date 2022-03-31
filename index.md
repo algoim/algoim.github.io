@@ -288,7 +288,7 @@ int ind = tree.nearest(y);
 
 <div markdown="1">
 
-<button type="button" class="collapsible">
+<button type="button" class="collapsible" markdown="1">
 
 ## Advanced: High-Precision Arithmetic
 
