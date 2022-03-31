@@ -286,16 +286,6 @@ int ind = tree.nearest(y);
 // The closest point is then pts[ind]
 ```
 
-<div markdown="1">
-
-<button type="button" class="collapsible" markdown="1">
-
-## Advanced: High-Precision Arithmetic
-
-</button>
-
-<div class="content" style="display: none;" markdown="1">
-
 ## Advanced: High-Precision Arithmetic
 
 By default, Algoim is configured to use `double`-precision arithmetic. For high-precision applications of the associated high-order accurate algorithms, Algoim can interface to a user-defined high-precision scalar type by redefining the `algoim::real` typedef in `algoim/real.hpp`. One possibility is to use the open-source [QD library](https://www.davidhbailey.com/dhbsoftware/) which implements software-driven double-double and quadruple-double arithmetic.
@@ -304,42 +294,8 @@ To make use of high-precision arithmetic in Algoim, a few modifications may be n
 - Some of the embedded/precomputed numbers may need to be updated. For example, the precomputed Gaussian quadrature schemes in `algoim/gaussquad.hpp`, which have about 20 digits of accuracy, would need updating for double-double or quadruple-double accuracy. (I can provide this data to 75 digits of accuracy upon request.)
 - Regarding the quadrature algorithms for domains implicitly-defined by polynomials, the provided code in Algoim assumes a _LAPACKE_ implementation is available. _LAPACK_ is used for just two purposes: (i) computing SVD factorisations and (ii) solving generalised eigenvalue problems. These methods would need to be replaced with ones supporting high-precision arithmetic. One possibility is to use [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page). Note: left unmodified, _QD_ is incompatible with _Eigen_ (because of ambiguous overloads when an integer is assigned to a `dd_real` or `qd_real` object); however it is relatively straightforward to patch _QD_ so that it can work with _Eigen_. Besides _QD_ there are also several other possibilities for high-precision arithmetic, e.g. [Boost](https://www.boost.org/).
 
-</div></div>
-
 ## About
 
 _Algoim_ was developed by [Robert Saye](http://math.lbl.gov/~saye/) in the [Mathematics Group](http://math.lbl.gov) at the [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) as part of his research on numerical methods for high-order accurate interface dynamics, with applications in multi-phase multi-physics. For more information and applications of these algorithms, visit [his research page](http://math.lbl.gov/~saye/).
 
 This work was supported in part by the U.S. Department of Energy (DOE), Office of Science, Office of Advanced Scientific Computing Research (ASCR) Applied Mathematics Program, by a DOE Office of Science Early Career Research Program award, and by the DOE ASCR Scientific Discovery through Advanced Computing (SciDAC) FASTMath program, all under Contract No. DE-AC02-05CH11231 at Lawrence Berkeley National Laboratory.
-
-
-
-
-
-
-
-------
-
-<script type="text/javascript">
-    function loadCSS(filename){ 
-       var file = document.createElement("link");
-       file.setAttribute("rel", "stylesheet");
-       file.setAttribute("type", "text/css");
-       file.setAttribute("href", filename);
-       document.head.appendChild(file);
-    }
-    loadCSS("collapse.css");
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-    for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.display === "block") {
-          content.style.display = "none";
-        } else {
-          content.style.display = "block";
-        }
-      });
-    }
-</script>
