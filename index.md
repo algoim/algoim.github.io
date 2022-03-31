@@ -286,7 +286,7 @@ int ind = tree.nearest(y);
 // The closest point is then pts[ind]
 ```
 
-<div><button type="button" class="collapsible" markdown="1">
+<div markdown="1"><button type="button" class="collapsible">
 
 ## Advanced: High-Precision Arithmetic
 
